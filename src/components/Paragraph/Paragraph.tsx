@@ -1,4 +1,5 @@
 import { useState } from "react";
+import _isEqual from "lodash/isEqual";
 import { createReviewSchema } from "../../schema/review";
 import { CreateReview } from "../../schema/review";
 import { Type } from "../../types/FileObject";
@@ -28,17 +29,8 @@ interface ParagraphProps {
     paragraphId: number
   ) => void;
 }
-// Failed attempt to memoize a component, developer needs more time
-/*
-  the second operand in react.memo...
-  (prev, next) => {
-    return (
-      prev.paragraph.comment === next.paragraph.comment &&
-      prev.paragraph.type === next.paragraph.type
-    );
-  }
-*/
-const Paragraph = React.memo(({ paragraph, onSave }: ParagraphProps) => {
+
+const Paragraph = ({ paragraph, onSave }: ParagraphProps) => {
   console.log("render paragraph");
   const [isIconClicked, setIsIconClicked] = useState(false);
   const [checked, setChecked] = useState(
@@ -114,12 +106,12 @@ const Paragraph = React.memo(({ paragraph, onSave }: ParagraphProps) => {
                 <Input
                   id="commentsParagraph"
                   label="Комментарий"
-                  defaultValue={paragraph.comment}
                   textArea={{ rows: 3, cols: 3 }}
                   height={60}
                   register={register}
                   errors={errors}
                   {...field}
+                  defaultValue={paragraph.comment}
                 />
               )}
             />
@@ -129,6 +121,10 @@ const Paragraph = React.memo(({ paragraph, onSave }: ParagraphProps) => {
       </div>
     </>
   );
-});
+};
+const areEqual = (prevProps: ParagraphProps, nextProps: ParagraphProps) => {
+  return _isEqual(prevProps.paragraph, nextProps.paragraph);
+};
 
-export default Paragraph;
+// eslint-disable-next-line react-refresh/only-export-components
+export default React.memo(Paragraph, areEqual);

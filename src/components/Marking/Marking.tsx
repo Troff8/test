@@ -30,16 +30,17 @@ function Marking() {
     data: { commentsParagraph: string; type: boolean },
     paragraphId: number
   ) => {
-    const updatedParagraphs = paragraphs.map((p) =>
-      p.id === paragraphId
-        ? {
-            ...p,
-            comment: data.commentsParagraph,
-            type: data.type ? Type.CORRECT : Type.INCORRECT,
-          }
-        : p
+    setParagraphs((prevParagraphs) =>
+      prevParagraphs.map((p) =>
+        p.id === paragraphId
+          ? {
+              ...p,
+              comment: data.commentsParagraph,
+              type: data.type ? Type.CORRECT : Type.INCORRECT,
+            }
+          : p
+      )
     );
-    setParagraphs(updatedParagraphs);
   };
 
   return (
