@@ -1,0 +1,33 @@
+.button {
+  box-sizing: border-box;
+
+  white-space: nowrap;
+
+  outline: none;
+  appearance: none;
+
+  border: 1px solid;
+  border-radius: 10px;
+
+  transition: 200ms cubic-bezier(0.3, 0, 0.5, 1);
+
+  background-color: transparent;
+  cursor: pointer;
+
+  min-height: 28px;
+  padding: 5px 16px;
+
+  font-size: 13px;
+}
+.button:hover {
+  background-color: var(--bg);
+}
+.warning {
+  border: 1px solid red;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
