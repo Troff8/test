@@ -39,6 +39,7 @@ interface ParagraphProps {
   }
 */
 const Paragraph = React.memo(({ paragraph, onSave }: ParagraphProps) => {
+  console.log("render paragraph");
   const [isIconClicked, setIsIconClicked] = useState(false);
   const [checked, setChecked] = useState(
     paragraph.type == Type.INCORRECT ? false : true
@@ -49,7 +50,7 @@ const Paragraph = React.memo(({ paragraph, onSave }: ParagraphProps) => {
     handleSubmit,
     formState: { errors },
     register,
-    reset,
+    // reset,
   } = useForm<CreateReview>({
     resolver: zodResolver(createReviewSchema),
   });
@@ -63,9 +64,15 @@ const Paragraph = React.memo(({ paragraph, onSave }: ParagraphProps) => {
   }
 
   const saveReview: SubmitHandler<CreateReview> = async (data) => {
-    onSave({ ...data, type: checked }, paragraph.id);
+    onSave(
+      {
+        commentsParagraph: data.commentsParagraph || paragraph.comment,
+        type: checked,
+      },
+      paragraph.id
+    );
     setIsIconClicked(false);
-    reset();
+    // reset();
   };
 
   return (

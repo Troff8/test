@@ -47,9 +47,9 @@ function Marking() {
       <h2 className={styles.title}>Разметка данных</h2>
       <div className={styles.container}>
         <div className={styles.marking}>
-          {paragraphs.map((paragraph, index) => (
+          {paragraphs.map((paragraph) => (
             <Paragraph
-              key={index}
+              key={paragraph.id}
               paragraph={paragraph}
               onSave={handleSaveReview}
             />
