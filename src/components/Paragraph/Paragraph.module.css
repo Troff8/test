@@ -25,9 +25,9 @@
 }
 
 .reviewBlock {
-  /* position: absolute; */
-  top: 1px;
-  left: 30px;
+  position: fixed;
+  top: 180px;
+  left: 80px;
   display: flex;
   flex-direction: column;
   gap: 5px;
